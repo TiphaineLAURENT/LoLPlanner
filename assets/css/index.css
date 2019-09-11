@@ -1,3 +1,13 @@
 html {
   overflow: hidden;
 }
+
+.names {
+  padding-left: 5%;
+  width: fit-content;
+}
+
+.summonerSpell {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
