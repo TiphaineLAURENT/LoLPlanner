@@ -1,6 +1,57 @@
 class Player {
-  constructor(summonerName, server, champion) {
-    this.node = document.querySelector("#player");
+  constructor(team, summonerName, server, champion) {
+    this.id = Player.ids += 1;
+    document.querySelector(`#${team}Team`).innerHTML += `
+    <div class="column is-one-fifth" id="player${this.id}">
+                <div class="box">
+                  <div class="header is-flex">
+                    <figure class="image is-64x64">
+                      <img src="http://avatar.leagueoflegends.com/euw/mcpkaosce.png" alt="Image" id="profileIcon">
+                    </figure>
+                    <div class="names">
+                      <h2 class="title has-text-dark is-4" id="champion">Warwick</h2>
+                      <h3 class="subtitle has-text-dark is-6" id="summonerName">Kaosce</h3>
+                    </div>
+                  </div>
+                  <div class="content">
+                    <p>
+                      <div class="summonerSpells is-flex">
+                        <figure class="image is-32x32 summonerSpell is-pulled-left">
+                          <img src="http://ddragon.leagueoflegends.com/cdn/8.11.1/img/spell/SummonerDot.png" alt="Image" id="profileIcon">
+                          <small>Ignite</small>
+                        </figure>
+                        <figure class="image is-32x32 summonerSpell is-pulled-left">
+                          <img src="http://ddragon.leagueoflegends.com/cdn/8.11.1/img/spell/SummonerExhaust.png" alt="Image" id="profileIcon">
+                          <small>Exhaust</small>
+                        </figure>
+                      </div>
+                      <br>
+                      <p class="has-text-centered" id="score">0/0/0</p>
+                    </p>
+                  </div>
+                  <nav class="level is-mobile">
+                    <div class="level-left">
+                      <a class="level-item" aria-label="reply">
+                        <span class="icon is-small">
+                          <i class="fas fa-reply" aria-hidden="true"></i>
+                        </span>
+                      </a>
+                      <a class="level-item" aria-label="retweet">
+                        <span class="icon is-small">
+                          <i class="fas fa-retweet" aria-hidden="true"></i>
+                        </span>
+                      </a>
+                      <a class="level-item" aria-label="like">
+                        <span class="icon is-small">
+                          <i class="fas fa-heart" aria-hidden="true"></i>
+                        </span>
+                      </a>
+                    </div>
+                  </nav>
+                </div>
+              </div>
+`;
+    this.node = document.querySelector(`#player${this.id}`);
     this._profileIcon = this.node.querySelector("#profileIcon");
     this._champion = this.node.querySelector("#champion");
     this._summonerName = this.node.querySelector("#summonerName");
@@ -97,3 +148,5 @@ class Player {
     };
   }
 }
+
+Player.ids = 0;
