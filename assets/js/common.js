@@ -50,10 +50,8 @@ function getAssets(assetid, id) {
 
 function get(url) {
   return new Promise(resolve => {
-    let done = false;
-
-    let data = "";
     https.get(url, (resp) => {
+      let data = "";
       resp.on('data', (chunk) => {
         data += chunk;
       });
