@@ -8,6 +8,7 @@ const itemsJson = JSON.parse(readFileSync("./assets/examples/items.json"));
 const masteriesJson = JSON.parse(readFileSync("./assets/examples/masteries.json"));
 const runesJson = JSON.parse(readFileSync("./assets/examples/runes.json"));
 const summonerSpellsJson = JSON.parse(readFileSync("./assets/examples/summonerSpells.json"));
+const activeGameJson = JSON.parse(readFileSync("./assets/examples/activeGame.json"));
 
 // Gardez une reference globale de l'objet window, si vous ne le faites pas, la fenetre sera
 // fermee automatiquement quand l'objet JavaScript sera garbage collected.
@@ -21,6 +22,7 @@ function createWindow () {
       nodeIntegration: true
     }
   });
+  win.maximize();
 
   // and load the index.html of the app.
   win.loadFile('index.html');
@@ -41,6 +43,10 @@ ipcMain.on('json-request', (event, arg) => {
   switch (arg) {
     case "summoner":
       event.returnValue = summonerJson;
+      break;
+
+    case "activeGame":
+      event.returnValue = activeGameJson;
       break;
 
     case "champions":
