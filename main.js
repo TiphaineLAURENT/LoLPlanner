@@ -1,9 +1,17 @@
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain, net } = require('electron');
+const { readFileSync } = require('fs');
+const { get, PATCH_VERSION } = require('./assets/js/common');
+
+const summonerJson = JSON.parse(readFileSync("./assets/examples/summoner.json"));
+const championsJson = JSON.parse(readFileSync("./assets/examples/champions.json"));
+const itemsJson = JSON.parse(readFileSync("./assets/examples/items.json"));
+const masteriesJson = JSON.parse(readFileSync("./assets/examples/masteries.json"));
+const runesJson = JSON.parse(readFileSync("./assets/examples/runes.json"));
+const summonerSpellsJson = JSON.parse(readFileSync("./assets/examples/summonerSpells.json"));
 
 // Gardez une reference globale de l'objet window, si vous ne le faites pas, la fenetre sera
 // fermee automatiquement quand l'objet JavaScript sera garbage collected.
-let win
-
+let win = null;
 function createWindow () {
   // Créer le browser window.
   win = new BrowserWindow({
@@ -29,6 +37,35 @@ function createWindow () {
   });
 }
 
+ipcMain.on('json-request', (event, arg) => {
+  switch (arg) {
+    case "summoner":
+      event.returnValue = summonerJson;
+      break;
+
+    case "champions":
+      event.returnValue = championsJson;
+      break;
+
+    case "items":
+      event.returnValue = itemsJson;
+      break;
+
+    case "masteries":
+      event.returnValue = masteriesJson;
+      break;
+
+    case "runes":
+      event.returnValue = runesJson;
+      break;
+
+    case "summonerSpells":
+      event.returnValue = summonerSpellsJson;
+      break;
+  }
+});
+
+
 // Cette méthode sera appelée quant Electron aura fini
 // de s'initialiser et sera prêt à créer des fenêtres de navigation.
 // Certaines APIs peuvent être utilisées uniquement quand cet événement est émit.
@@ -50,5 +87,3 @@ app.on('activate', () => {
     createWindow();
   }
 });
-
-// Dans ce fichier, vous pouvez inclure le reste de votre code spécifique au processus principal. Vous pouvez également le mettre dans des fichiers séparés et les inclure ici.
