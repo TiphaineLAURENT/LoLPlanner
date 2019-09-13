@@ -1,9 +1,9 @@
 class Player {
   constructor(team, summonerName, server, champion) {
     this.id = Player.ids += 1;
-    document.querySelector(`#${team}Team`).innerHTML += `
+    document.querySelector(`.team.is-${team}`).innerHTML += `
     <div class="column is-one-fifth" id="player${this.id}">
-                <div class="box">
+                <div class="box is-material">
                   <div class="header is-flex">
                     <figure class="image is-64x64">
                       <img src="http://avatar.leagueoflegends.com/euw/mcpkaosce.png" alt="Image" id="profileIcon">
